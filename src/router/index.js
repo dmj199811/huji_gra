@@ -56,13 +56,13 @@ export const constantRoutes = [
   // },
   {
     path: '/',
-    redirect: '/book_import',
+    redirect: '/lesson_survey',
     component: Layout,
     children: [{
-      path: '/book_import',
-      name: 'book_import',
-      meta: { title: '书籍导入管理' },
-      component: () => import('@/views/book_import/index')
+      path: '/lesson_survey',
+      name: 'lesson_survey',
+      meta: { title: '课调发起平台' },
+      component: () => import('@/views/lesson_survey/index')
     }]
   },
   {
@@ -71,7 +71,7 @@ export const constantRoutes = [
     children: [{
       path: '/point_data',
       name: 'point_data',
-      meta: { title: '埋点管理平台' },
+      meta: { title: '数据查看平台' },
       component: () => import('@/views/point_data/index')
     }]
   },
@@ -81,7 +81,7 @@ export const constantRoutes = [
     children: [{
       path: '/rank_manager',
       name: 'rank_manager',
-      meta: { title: '排行榜书籍管理' },
+      meta: { title: '用户书籍管理' },
       component: () => import('@/views/rank_manager/index')
     }]
   },
