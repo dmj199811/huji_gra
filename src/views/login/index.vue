@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">胡杰智慧校园</h3>
       </div>
 
       <el-form-item prop="username">
@@ -42,13 +42,21 @@
       </el-form-item>
 
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
-      </div>
-
     </el-form>
+    <div class="animation_box">
+      <ul>
+        <li>胡杰</li>
+        <li>代码</li>
+        <li>智慧</li>
+        <li>使我</li>
+        <li>校园</li>
+        <li>课程</li>
+        <li>快乐</li>
+        <li>调查</li>
+        <li>个屁</li>
+        <li>系统</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -124,7 +132,123 @@ export default {
   }
 }
 </script>
+<style lang="scss">
 
+  .animation_box{
+    position: absolute;
+    left:0;
+    right: 0;
+    bottom:0;
+    top:0;
+    margin:auto;
+    z-index:1;
+    width: 100%;
+    height: 800px;
+    background: linear-gradient(45deg,#feac5e,#c779d0,#4bc0c8);
+  }
+  ul,li{
+    list-style: none;
+    padding: 0;
+    margin:0;
+    color:white;
+  }
+  li{
+    position: absolute;
+    bottom:-120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    color: black;
+    background:rgb(255, 255, 255);
+  }
+  li:nth-child(1){
+    width:100px;
+    height: 100px;
+    left: 10%;
+    animation:rotate infinite 10s linear 3s;
+  }
+  li:nth-child(2){
+    width:80px;
+    height: 80px;
+    left: 18%;
+    animation:rotate infinite 10s linear 7s;
+  }
+  li:nth-child(3){
+    width:120px;
+    height: 120px;
+    left: 27%;
+    animation:rotate infinite 10s linear 4s;
+  }
+  li:nth-child(4){
+    width:100px;
+    height: 100px;
+    left: 36%;
+    animation:rotate infinite 10s linear 5s;
+  }
+  li:nth-child(5){
+    width:100px;
+    height: 100px;
+    left: 45%;
+    animation:rotate infinite 10s linear 6s;
+  }
+  li:nth-child(6){
+    width:100px;
+    height: 100px;
+    left: 54%;
+    animation:rotate infinite 10s linear 3s;
+  }
+  li:nth-child(7){
+    width:100px;
+    height: 100px;
+    left: 63%;
+    animation:rotate infinite 10s linear 7s;
+  }
+  li:nth-child(8){
+    width:100px;
+    height: 100px;
+    left: 72%;
+    animation:rotate infinite 10s linear 2s;
+  }
+  li:nth-child(9){
+    width:100px;
+    height: 100px;
+    left: 81%;
+    animation:rotate infinite 10s linear 9s;
+  }
+  li:nth-child(10){
+    width:100px;
+    height: 100px;
+    left: 90%;
+    animation:rotate infinite 10s linear 4s;
+  }
+  @keyframes rotate{
+    0%{
+      transform: translateY(0px) rotate(-90deg);
+      opacity:0
+    }
+    10%{
+      transform: translateY(0px) rotate(-90deg);
+      opacity:0
+    }
+    30%{
+      transform: translateY(-100px) rotate(-20deg);
+       opacity:0.4;
+    }
+    50%{
+      transform: translateY(-240px) rotate(20deg);
+      opacity:0.6;
+    }
+    80%{
+      transform: translateY(-400px) rotate(135deg);
+      opacity:0.4;
+    }
+    100%{
+      transform: translateY(-600px) rotate(270deg);
+      opacity:0;
+    }
+  }
+</style>
 <style lang="scss">
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
@@ -178,17 +302,20 @@ $dark_gray:#889aa4;
 $light_gray:#eee;
 
 .login-container {
+
   min-height: 100%;
   width: 100%;
   background-color: $bg;
   overflow: hidden;
 
   .login-form {
-    position: relative;
+    position: absolute;
+    left: 50%;
+    margin-left:-260px;
+    z-index: 3;
     width: 520px;
     max-width: 100%;
     padding: 160px 35px 0;
-    margin: 0 auto;
     overflow: hidden;
   }
 
