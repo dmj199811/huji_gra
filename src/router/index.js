@@ -73,16 +73,11 @@ export const constantRoutes = [
       name: 'point_data',
       meta: { title: '数据查看平台' },
       component: () => import('@/views/point_data/index')
-    }]
-  },
-  {
-    path: '/rank_manager',
-    component: Layout,
-    children: [{
-      path: '/rank_manager',
-      name: 'rank_manager',
-      meta: { title: '用户书籍管理' },
-      component: () => import('@/views/rank_manager/index')
+    },{
+      path: '/point_information',
+      name: 'point_information',
+      hidden:true,
+      component: () => import('@/views/point_data/information.vue')
     }]
   },
   // {
