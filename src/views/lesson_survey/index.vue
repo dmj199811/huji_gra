@@ -325,6 +325,8 @@ export default {
         case 1:
           this.radioQuestion = {
             type: 1,
+            correntAnsower: "",
+            score: "",
             question: "",
             ansower: ["", ""]
           };
@@ -333,6 +335,8 @@ export default {
         case 2:
           this.checkBoxQuestion = {
             type: 2,
+            score: "",
+            correntAnsower: "",
             question: "",
             ansower: ["", ""]
           };
@@ -341,7 +345,10 @@ export default {
         case 3:
           this.sectionQuestion = {
             type: 3,
-            question: ""
+            score: "",
+            correntAnsower: "",
+            question: "",
+            ansower: []
           };
           this.sectionVisible = true;
           break;
