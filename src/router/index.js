@@ -73,10 +73,10 @@ export const constantRoutes = [
       name: 'point_data',
       meta: { title: '数据查看平台' },
       component: () => import('@/views/point_data/index')
-    },{
+    }, {
       path: '/point_information',
       name: 'point_information',
-      hidden:true,
+      hidden: true,
       component: () => import('@/views/point_data/information.vue')
     }]
   },

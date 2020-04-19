@@ -4,18 +4,18 @@
       <el-button type="primary" @click="questionModal(1)">发起单选题</el-button>
       <el-button type="primary" @click="questionModal(2)">发起多选题</el-button>
       <el-button type="primary" @click="questionModal(3)">发起简答题</el-button>
-      <br />
-      <br />
+      <br>
+      <br>
       <span>问卷名称：</span>
       <el-input v-model="questionnaireName" style="width:300px;margin-bottom:10px;" clearable />
-      <br />
+      <br>
       <span>总计分数：</span>
-      <el-input disabled v-model="questionScore" style="width:300px" />
-      <el-button style="float:right" type="primary" @click="submitData()">保存问卷</el-button>
+      <el-input v-model="questionScore" disabled style="width:300px" />
+      <el-button style="float:right" type="primary" @click="submitData">保存问卷</el-button>
     </div>
     <!-- 单选弹窗 -->
     <el-dialog title="发起单选" width="650px" :visible.sync="radioVisible">
-      <el-form label-width="100px" :model="radioQuestion" ref="radioModel" :rules="rules">
+      <el-form ref="radioModel" label-width="100px" :model="radioQuestion" :rules="rules">
         <el-form-item label="题目" prop="question">
           <el-input v-model="radioQuestion.question" type="textarea" />
         </el-form-item>
@@ -38,7 +38,7 @@
     </el-dialog>
     <!-- 多选弹窗 -->
     <el-dialog title="发起多选" width="650px" :visible.sync="checkBoxVisible">
-      <el-form label-width="100px" :model="checkBoxQuestion" ref="checkBoxModel" :rules="rules">
+      <el-form ref="checkBoxModel" label-width="100px" :model="checkBoxQuestion" :rules="rules">
         <el-form-item label="题目" prop="question">
           <el-input v-model="checkBoxQuestion.question" type="textarea" />
         </el-form-item>
@@ -61,11 +61,11 @@
     </el-dialog>
     <!-- 简答弹窗 -->
     <el-dialog title="发起简答" width="650px" :visible.sync="sectionVisible">
-      <el-form label-width="100px" :model="sectionQuestion" ref="sectionModel" :rules="rules">
+      <el-form ref="sectionModel" label-width="100px" :model="sectionQuestion" :rules="rules">
         <el-form-item label="题目" prop="question">
           <el-input v-model="sectionQuestion.question" type="textarea" />
         </el-form-item>
-        <el-form-item label="给分"  prop="score">
+        <el-form-item label="给分" prop="score">
           <el-input v-model.number="sectionQuestion.score" />
         </el-form-item>
       </el-form>
@@ -119,14 +119,14 @@
       </el-collapse>
       <!-- 修改弹窗 -->
       <el-dialog title="修改题目" width="650px" :visible.sync="updateVisible">
-        <el-form label-width="100px" :model="data1" ref="changeModel" :rules="rules">
+        <el-form ref="changeModel" label-width="100px" :model="data1" :rules="rules">
           <el-form-item label="题目" prop="question">
             <el-input v-model="data1.question" type="textarea" />
           </el-form-item>
           <el-form-item label="给分" prop="score">
             <el-input v-model.number="data1.score" />
           </el-form-item>
-          <el-form-item label="正确答案" v-if="data1.type!=3" prop="correntAnsower">
+          <el-form-item v-if="data1.type!=3" label="正确答案" prop="correntAnsower">
             <el-input v-model="data1.correntAnsower" />
           </el-form-item>
           <template v-for="(item,index) in data1.ansower">
@@ -144,218 +144,218 @@
   </div>
 </template>
 <script>
-import { post_json } from "../../utils/utils.js";
+import { post_json } from '../../utils/utils.js'
 
 export default {
   data() {
     return {
       activeNames: [],
-      questionnaireName: "",
+      questionnaireName: '',
       updateVisible: false,
       radioVisible: false,
       checkBoxVisible: false,
       sectionVisible: false,
       radioQuestion: {
         type: 1,
-        correntAnsower: "",
-        score: "",
-        question: "",
-        ansower: ["", ""]
+        correntAnsower: '',
+        score: '',
+        question: '',
+        ansower: ['', '']
       },
       checkBoxQuestion: {
         type: 2,
-        score: "",
-        correntAnsower: "",
-        question: "",
-        ansower: ["", ""]
+        score: '',
+        correntAnsower: '',
+        question: '',
+        ansower: ['', '']
       },
       sectionQuestion: {
         type: 3,
-        score: "",
-        correntAnsower: "",
-        question: "",
+        score: '',
+        correntAnsower: '',
+        question: '',
         ansower: []
       },
       questionData: [],
-      index1: "",
+      index1: '',
       data1: {
-        type: "",
-        question: ""
+        type: '',
+        question: ''
       },
       rules: {
         question: [
-          { required: true, message: "请输入问题", trigger: "change" },
-          { min: 1, max: 60, message: "请控制字数", trigger: "blur" }
+          { required: true, message: '请输入问题', trigger: 'change' },
+          { min: 1, max: 60, message: '请控制字数', trigger: 'blur' }
         ],
         correntAnsower: [
-          { required: true, message: "请输入正确答案", trigger: "blur" }
+          { required: true, message: '请输入正确答案', trigger: 'blur' }
         ],
         score: [
           {
-            type: "number",
+            type: 'number',
             required: true,
-            message: "请输入数字分数",
-            trigger: "change"
+            message: '请输入数字分数',
+            trigger: 'change'
           }
         ],
-        ansower: [{ required: true, message: "请输入答案", trigger: "change" }]
+        ansower: [{ required: true, message: '请输入答案', trigger: 'change' }]
       }
-    };
+    }
   },
   computed: {
     questionScore() {
-      let num = 0;
+      let num = 0
       this.questionData.forEach(item => {
-        num += +item.score;
-      });
-      return num;
+        num += +item.score
+      })
+      return num
     }
   },
   methods: {
     submitData() {
-      if (this.questionnaireName === "") {
-        this.$message.error("请输入当前问卷名称");
-        return;
+      if (this.questionnaireName === '') {
+        this.$message.error('请输入当前问卷名称')
+        return
       }
-      const arr1 = [];
-      let score = 0;
+      const arr1 = []
+      let score = 0
       this.questionData.map((item, index) => {
-        arr1[index] = {};
-        arr1[index].order = index + 1;
-        arr1[index].currentAnswer = this.questionData[index].correntAnsower;
-        arr1[index].name = this.questionData[index].question;
-        arr1[index].type = this.questionData[index].type;
-        arr1[index].score = this.questionData[index].score;
-        score += +arr1[index].score;
-        if (JSON.stringify(item.ansower) !== "[]") {
-          arr1[index].options = [];
-          console.log(item.ansower, "==========");
+        arr1[index] = {}
+        arr1[index].order = index + 1
+        arr1[index].currentAnswer = this.questionData[index].correntAnsower
+        arr1[index].name = this.questionData[index].question
+        arr1[index].type = this.questionData[index].type
+        arr1[index].score = this.questionData[index].score
+        score += +arr1[index].score
+        if (JSON.stringify(item.ansower) !== '[]') {
+          arr1[index].options = []
           item.ansower.map((item1, index1) => {
-            arr1[index].options[index1] = {};
+            arr1[index].options[index1] = {}
             arr1[index].options[index1].content = this.questionData[
               index
-            ].ansower[index1];
-            arr1[index].options[index1].order = index1 + 1;
-          });
+            ].ansower[index1]
+            arr1[index].options[index1].order = index1 + 1
+          })
         }
-      });
+      })
       if (score !== 100) {
-        this.$message.error(`当前题目分值为${score}, 请调整至100`);
-        return;
+        this.$message.error(`当前题目分值为${score}, 请调整至100`)
+        return
       }
       const data = {
         name: this.questionnaireName,
-        userId: localStorage.getItem("id"),
-        username: localStorage.getItem("username"),
+        userId: localStorage.getItem('id'),
+        username: localStorage.getItem('username'),
         questions: arr1
-      };
-      post_json("/api/question/survey", data).then((res)=>{
-        if(res.status===200){
-        this.$message.success('新建成功')
-        }else{
+      }
+      post_json('/api/question/survey', data).then(res => {
+        if (res.status === 200) {
+          this.$message.success('新建成功')
+          this.$router.push({ path: '/point_data' })
+        } else {
           this.$message.error(res.data.message)
         }
-      });
+      })
     },
     questionMove(data, index) {
-      const obj1 = this.questionData[index];
-      if (data === "toTOP") {
-        this.questionData[index] = this.questionData[index - 1];
-        this.questionData[index - 1] = obj1;
-      } else if (data === "toBottom") {
-        this.questionData[index] = this.questionData[index + 1];
-        this.questionData[index + 1] = obj1;
+      const obj1 = this.questionData[index]
+      if (data === 'toTOP') {
+        this.questionData[index] = this.questionData[index - 1]
+        this.questionData[index - 1] = obj1
+      } else if (data === 'toBottom') {
+        this.questionData[index] = this.questionData[index + 1]
+        this.questionData[index + 1] = obj1
       }
-      this.$forceUpdate();
+      this.$forceUpdate()
     },
     toUpdate() {
-      this.$set(this.questionData,this.index1,this.data1)
+      this.$set(this.questionData, this.index1, this.data1)
       // this.questionData[this.index1] = this.data1;
-      this.updateVisible = false;
+      this.updateVisible = false
     },
     updateData(data, index) {
-      this.data1 = JSON.parse(JSON.stringify(data));
-      this.index1 = index;
-      this.updateVisible = true;
+      this.data1 = JSON.parse(JSON.stringify(data))
+      this.index1 = index
+      this.updateVisible = true
     },
     radioAdd() {
       this.$refs.radioModel.validate(valid => {
         if (valid) {
-          this.questionData.push(this.radioQuestion);
-          this.radioVisible = false;
+          this.questionData.push(this.radioQuestion)
+          this.radioVisible = false
         }
-      });
+      })
     },
     checkBoxAdd() {
       this.$refs.checkBoxModel.validate(valid => {
         if (valid) {
-          this.questionData.push(this.checkBoxQuestion);
-          this.checkBoxVisible = false;
+          this.questionData.push(this.checkBoxQuestion)
+          this.checkBoxVisible = false
         }
-      });
+      })
     },
     sectionAdd() {
       this.$refs.sectionModel.validate(valid => {
         if (valid) {
-          this.questionData.push(this.sectionQuestion);
-          this.sectionVisible = false;
+          this.questionData.push(this.sectionQuestion)
+          this.sectionVisible = false
         }
-      });
+      })
     },
     addAnsower1(index) {
-      this.radioQuestion.ansower.splice(index + 1, 0, "");
+      this.radioQuestion.ansower.splice(index + 1, 0, '')
     },
     addAnsower2(index) {
-      this.checkBoxQuestion.ansower.splice(index + 1, 0, "");
+      this.checkBoxQuestion.ansower.splice(index + 1, 0, '')
     },
     addAnsower3(index) {
-      this.data1.ansower.splice(index + 1, 0, "");
+      this.data1.ansower.splice(index + 1, 0, '')
     },
     deleteAnsower1(index) {
-      this.radioQuestion.ansower.splice(index, 1);
+      this.radioQuestion.ansower.splice(index, 1)
     },
     deleteAnsower2(index) {
-      this.checkBoxQuestion.ansower.splice(index, 1);
+      this.checkBoxQuestion.ansower.splice(index, 1)
     },
     deleteAnsower3(index) {
-      this.data1.ansower.splice(index, 1);
+      this.data1.ansower.splice(index, 1)
     },
     questionModal(data) {
       switch (data) {
         case 1:
           this.radioQuestion = {
             type: 1,
-            correntAnsower: "",
-            score: "",
-            question: "",
-            ansower: ["", ""]
-          };
-          this.radioVisible = true;
-          break;
+            correntAnsower: '',
+            score: '',
+            question: '',
+            ansower: ['', '']
+          }
+          this.radioVisible = true
+          break
         case 2:
           this.checkBoxQuestion = {
             type: 2,
-            score: "",
-            correntAnsower: "",
-            question: "",
-            ansower: ["", ""]
-          };
-          this.checkBoxVisible = true;
-          break;
+            score: '',
+            correntAnsower: '',
+            question: '',
+            ansower: ['', '']
+          }
+          this.checkBoxVisible = true
+          break
         case 3:
           this.sectionQuestion = {
             type: 3,
-            score: "",
-            correntAnsower: "",
-            question: "",
+            score: '',
+            correntAnsower: '',
+            question: '',
             ansower: []
-          };
-          this.sectionVisible = true;
-          break;
+          }
+          this.sectionVisible = true
+          break
       }
     }
   }
-};
+}
 </script>
 <style>
 .outer_bg1 {
