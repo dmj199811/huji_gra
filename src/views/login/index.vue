@@ -93,8 +93,8 @@ export default {
     }
     return {
       loginForm: {
-        username: '杰少',
-        password: '666666'
+        username: 'laodengtou',
+        password: 'laodengtou'
       },
       loginRules: {
         username: [
@@ -177,7 +177,8 @@ export default {
   margin: auto;
   z-index: 1;
   width: 100%;
-  height: 800px;
+  height: 100%;
+  overflow: hidden;
   background: linear-gradient(45deg, #feac5e, #c779d0, #4bc0c8);
   ul,
   li {
@@ -337,9 +338,9 @@ $dark_gray: #889aa4;
 $light_gray: #eee;
 
 .login-container {
-  min-height: 100%;
+  height: 100%;
+  overflow:hidden;
   width: 100%;
-  background-color: $bg;
   overflow: hidden;
 
   .login-form {
